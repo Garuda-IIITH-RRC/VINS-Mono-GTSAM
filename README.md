@@ -1,5 +1,5 @@
 # VINS-Mono
-## A Robust and Versatile Monocular Visual-Inertial State Estimator
+## A Robust and Versatile Monocular Visual-Inertial State Estimator with GTSAM backend
 In this version we have **replaced the ceres solver with GTSAM pipeline**. This had been done initially to incorporate robust loop closure detection between two robot frames using **GNC(Graduated Nonconvexity)** optimization method.
 
 **11 Jan 2019**: An extension of **VINS**, which supports stereo cameras / stereo cameras + IMU / mono camera + IMU, is published at [VINS-Fusion](https://github.com/HKUST-Aerial-Robotics/VINS-Fusion)
