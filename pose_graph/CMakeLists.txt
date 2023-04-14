@@ -6,6 +6,9 @@ set(CMAKE_CXX_FLAGS "-std=c++14")
 #-DEIGEN_USE_MKL_ALL")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
 
+
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+
 find_package(catkin REQUIRED COMPONENTS
     roscpp
     std_msgs
@@ -13,19 +16,24 @@ find_package(catkin REQUIRED COMPONENTS
     camera_model
     cv_bridge
     roslib
-    )
+)
+
+find_package(GTSAM REQUIRED)
 
 find_package(OpenCV)
 
-
 find_package(Ceres REQUIRED)
 
-set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-find_package(Eigen3)
+find_package(Eigen3 REQUIRED)
 
-include_directories(${catkin_INCLUDE_DIRS} ${CERES_INCLUDE_DIRS}  ${EIGEN3_INCLUDE_DIR})
+find_package(Boost REQUIRED)
+
 
 catkin_package()
+
+include_directories(${catkin_INCLUDE_DIRS} ${CERES_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR} ${GTSAM_INCLUDE_DIR})
+link_directories(${GTSAM_LIBRARY_DIRS})
+
 
 add_executable(pose_graph
     src/pose_graph_node.cpp
@@ -41,7 +49,14 @@ add_executable(pose_graph
     src/ThirdParty/DUtils/Timestamp.cpp
     src/ThirdParty/DVision/BRIEF.cpp
     src/ThirdParty/VocabularyBinary.cpp
-    )
+)
 
-target_link_libraries(pose_graph ${catkin_LIBRARIES}  ${OpenCV_LIBS} ${CERES_LIBRARIES}) 
+# add_executable(Trial src/Trial.cpp)
+
+
+target_link_libraries(pose_graph ${catkin_LIBRARIES} ${CERES_LIBRARIES} ${OpenCV_LIBS} gtsam)
+message(${OpenCV_LIBS})
+# target_link_libraries(Trial ${catkin_LIBRARIES}  ${CERES_LIBRARIES} ${OpenCV_LIBS} gtsam)
+
+# message("message" ${gtsam})
 # message("catkin_lib  ${catkin_LIBRARIES}")
