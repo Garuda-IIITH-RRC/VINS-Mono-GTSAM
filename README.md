@@ -23,8 +23,12 @@ Clone the repository and catkin_make:
     source ~/catkin_ws/devel/setup.bash
 ```
 
-## 3. Visual-Inertial Odometry and Pose Graph Reuse on Public datasets
-Download [EuRoC MAV Dataset](http://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets). Although it contains stereo cameras, we only use one camera. The system also works with [ETH-asl cla dataset](http://robotics.ethz.ch/~asl-datasets/maplab/multi_session_mapping_CLA/bags/). We take EuRoC as the example.
+## 3. Visual-Inertial Odometry and Pose Graph Reuse on our datasets
+
+Our Hardware setup
+Intel NUC i7 processor
+D455 stereo camera
+
 
 **3.1 visual-inertial odometry and loop closure**
 
@@ -96,6 +100,10 @@ For rolling shutter camera (carefully calibrated, reprojection error under 0.5 p
     git clone https://github.com/ethz-asl/voxblox
     cd ../
     catkin_make
+    mv /src/support_file/d455_outdoor.launch /src/voxblox/voxblox_ros/launch
     source devel/setup.bash
 ```
-Install all the dependencies vox blox requires to build
+Install all the dependencies vox blox requires to build.
+5.1 Run mapping module
+``` 
+   roslaunch voxblox_ros d455_outdoor.launch
