@@ -32,7 +32,7 @@ Clone the repository and catkin_make:
 
 Suppose you are familiar with ROS and you can get a camera and an IMU with raw metric measurements in ROS topic, you can follow these steps to set up your device.
 
-3.1.1 Change to your topic name in the config file. The image should exceed 20Hz and IMU should exceed 100Hz. Both image and IMU should have the accurate time stamp. IMU should contain absolute acceleration values including gravity.
+3.1.1 Change to your topic name in the config file (realsense_color_config.yaml). The image should exceed 20Hz and IMU should exceed 100Hz. Both image and IMU should have the accurate time stamp. IMU should contain absolute acceleration values including gravity.
 
 3.2 Camera calibration:
 
@@ -72,12 +72,12 @@ Install all the dependencies vox blox requires to build.
     4. You can change the resolution of the map(size of voxels) or the mesh by changing the “tsdf_voxel_size param”
 **5.1 visual-inertial odometry and loop closure**
 
-5.1.1 Open three terminals, launch the vins_estimator , rviz and play the bag file respectively. Take MH_01 for example
+5.1.1 Open three terminals, launch the vins_estimator , rviz and play the bag file respectively. 
 ```
-    roslaunch vins_estimator d455.launch 
+    roslaunch vins_estimator realsense_color.launch 
     roslaunch vins_estimator vins_rviz.launch
     roslaunch voxblox_ros d455_outdoor.launch 
-    rosbag play YOUR_PATH_TO_DATASET/MH_01_easy.bag 
+    rosbag play YOUR_PATH_TO_DATASET/your.bag 
 ```
 (If you fail to open vins_rviz.launch, just open an empty rviz, then load the config file: file -> Open Config-> YOUR_VINS_FOLDER/config/vins_rviz_config.rviz)
 
