@@ -17,7 +17,7 @@ Follow [Ceres Installation](http://ceres-solver.org/installation.html), remember
 Clone the repository and catkin_make:
 ```
     cd ~/catkin_ws/src
-    git clone https://github.com/HKUST-Aerial-Robotics/VINS-Mono.git
+    git clone [https://github.com/HKUST-Aerial-Robotics/VINS-Mono.git](https://github.com/Garuda-IIITH-RRC/VINS-Mono-GTSAM.git)
     cd ../
     catkin_make
     source ~/catkin_ws/devel/setup.bash
