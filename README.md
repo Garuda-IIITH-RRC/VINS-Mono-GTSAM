@@ -12,12 +12,24 @@ additional ROS pacakge
 1.2. **Ceres Solver**
 Follow [Ceres Installation](http://ceres-solver.org/installation.html), remember to **make install**.
 (Our testing environment: Ubuntu 20.04, ROS noetic, OpenCV 3.3.1, Eigen 3.3.3) 
-
+1.3 **Install GTSAM**
+```
+sudo apt-get -y install libboost-all-dev
+sudo apt-get -y install libtbb-dev
+git clone https://github.com/borglab/gtsam.git
+cd gtsam && git checkout 4.2a8
+mkdir build
+cd build
+cmake -DGTSAM_USE_SYSTEM_EIGEN ..
+make check (optional, runs unit tests)
+make install
+```
 ## 2. Build VINS-Mono on ROS
 Clone the repository and catkin_make:
 ```
     cd ~/catkin_ws/src
     git clone [https://github.com/HKUST-Aerial-Robotics/VINS-Mono.git](https://github.com/Garuda-IIITH-RRC/VINS-Mono-GTSAM.git)
+    cd VINS-Mono && git checkout origin/freeture/Gtsam_hydra_V1 && cd ..
     cd ../
     catkin_make
     source ~/catkin_ws/devel/setup.bash
