@@ -40,7 +40,7 @@ We support the [pinhole model](http://docs.opencv.org/2.4.8/modules/calib3d/doc/
 
 3.3 **Camera-Imu extrinsic parameters**:
 
-If you have seen the config files for EuRoC and AR demos, you can find that we can estimate and refine them online. If you familiar with transformation, you can figure out the rotation and position by your eyes or via hand measurements. Then write these values into config as the initial guess. Our estimator will refine extrinsic parameters online. If you don't know anything about the camera-IMU transformation, just ignore the extrinsic parameters and set the **estimate_extrinsic** to **2**, and rotate your device set at the beginning for a few seconds. When the system works successfully, we will save the calibration result. you can use these result as initial values for next time. An example of how to set the extrinsic parameters is in[extrinsic_parameter_example](https://github.com/HKUST-Aerial-Robotics/VINS-Mono/blob/master/config/extrinsic_parameter_example.pdf)
+ you can find that we can estimate and refine them online. If you familiar with transformation, you can figure out the rotation and position by your eyes or via hand measurements. Then write these values into config as the initial guess. Our estimator will refine extrinsic parameters online. If you don't know anything about the camera-IMU transformation, just ignore the extrinsic parameters and set the **estimate_extrinsic** to **2**, and rotate your device set at the beginning for a few seconds. When the system works successfully, we will save the calibration result. you can use these result as initial values for next time. An example of how to set the extrinsic parameters is in[extrinsic_parameter_example](https://github.com/HKUST-Aerial-Robotics/VINS-Mono/blob/master/config/extrinsic_parameter_example.pdf)
 
 3.4 **Temporal calibration**:
 Most self-made visual-inertial sensor sets are unsynchronized. You can set **estimate_td** to 1 to online estimate the time offset between your camera and IMU.  
@@ -86,7 +86,7 @@ Install all the dependencies vox blox requires to build.
 
 **5.2 map merge**
 
-After playing MH_01 bag, you can continue playing MH_02 bag, MH_03 bag ... The system will merge them according to the loop closure.
+After playing 1 bag, you can continue playing 2 bag, 3 bag ... The system will merge them according to the loop closure.
 
 **5.3 Mapping**
 
@@ -96,6 +96,6 @@ To save map run the following command in a new terminal
 ```
 rosservice call /voxblox_node/generate_mesh "{}"
 ```
-
+The mesh is saved in voxblox_ros/mesh_results
 
 
