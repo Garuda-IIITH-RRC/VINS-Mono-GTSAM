@@ -968,3 +968,40 @@ void PoseGraph::updateKeyFrameLoop(int index, Eigen::Matrix<double, 8, 1> &_loop
         }
     }
 }
+
+void PoseGraph::saveBag(string Path)
+{
+    m_keyframelist.lock();
+    int i = 0;
+    rosbag::Bag bag;
+    bag.open(Path, rosbag::bagmode::Write);
+    for (auto it = keyframelist.begin(); it != keyframelist.end(); it++)
+    {
+        sensor_msgs::PointCloud2 pointcloud_ = (*it)->pointcloud;
+        Matrix3d temp = (*it)->vio_R_w_i;
+        Vector3d temp_v = (*it)->vio_T_w_i;
+        geometry_msgs::TransformStamped tf_stamped;
+        Eigen::Quaterniond quaternion{temp};
+        tf_stamped.header.stamp = ros::Time::now();
+        tf_stamped.header.frame_id = "world";
+        tf_stamped.child_frame_id = "body";
+
+        // Set the transform data (translation and rotation)
+        tf_stamped.transform.translation.x = temp_v.x();
+        tf_stamped.transform.translation.y = temp_v.y();
+        tf_stamped.transform.translation.z = temp_v.z();
+
+        tf_stamped.transform.rotation.x = quaternion.x();
+        tf_stamped.transform.rotation.y = quaternion.y();
+        tf_stamped.transform.rotation.z = quaternion.z();
+        tf_stamped.transform.rotation.w = quaternion.w();
+        i++;
+        pointcloud_.header.stamp = tf_stamped.header.stamp;
+        bag.write("/camera/depth/color/points", tf_stamped.header.stamp, pointcloud_);
+        bag.write("/body", tf_stamped.header.stamp, tf_stamped);
+        // bag.write("/clock", tf_stamped.header.stamp, tf_stamped.header.stamp);
+    }
+    printf("created bag %d\n",i);
+    bag.close();
+    m_keyframelist.unlock();
+}
