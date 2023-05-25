@@ -16,6 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
     camera_model
     cv_bridge
     roslib
+    rosbag
 )
 
 find_package(GTSAM REQUIRED)

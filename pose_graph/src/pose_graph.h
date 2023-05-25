@@ -24,6 +24,10 @@
 #include "ThirdParty/DBoW/TemplatedDatabase.h"
 #include "ThirdParty/DBoW/TemplatedVocabulary.h"
 
+#include <rosbag/bag.h>
+#include <sensor_msgs/PointCloud2.h>
+#include <geometry_msgs/TransformStamped.h>
+
 #include <gtsam/nonlinear/NonlinearFactorGraph.h>
 #include <gtsam/nonlinear/GaussNewtonOptimizer.h>
 #include <gtsam/slam/dataset.h>
@@ -49,6 +53,7 @@ public:
 	void loadKeyFrame(KeyFrame *cur_kf, bool flag_detect_loop); // to load keyframe to keyframelist, also adds factors to factor graph
 	void loadVocabulary(std::string voc_path);
 	void updateKeyFrameLoop(int index, Eigen::Matrix<double, 8, 1> &_loop_info);
+	void saveBag(string Path);
 	KeyFrame *getKeyFrame(int index);
 	nav_msgs::Path path[10];
 	nav_msgs::Path base_path;
@@ -62,7 +67,6 @@ public:
 	// world frame( base sequence or first sequence)<----> cur sequence frame
 	Vector3d w_t_vio;
 	Matrix3d w_r_vio;
-
 private:
 	//  variables for gtsam
 	// gtsam::nonlinear::ISAM2 *isam2;						   // gtsam isam2 optimizer
