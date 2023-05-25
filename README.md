@@ -29,7 +29,7 @@ Clone the repository and catkin_make:
 ```
     cd ~/catkin_ws/src
     git clone [https://github.com/HKUST-Aerial-Robotics/VINS-Mono.git](https://github.com/Garuda-IIITH-RRC/VINS-Mono-GTSAM.git)
-    cd VINS-Mono && git checkout origin/freeture/Gtsam_hydra_V1 && cd ..
+    cd VINS-Mono && git checkout origin/Gtsam_hydra_V2 && cd ..
     cd ../
     catkin_make
     source ~/catkin_ws/devel/setup.bash
