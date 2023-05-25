@@ -105,9 +105,17 @@ After playing 1 bag, you can continue playing 2 bag, 3 bag ... The system will m
 5.3.1 map save
 
 To save map run the following command in a new terminal
+After running all the bag files, in the VINS-Estimator terminal press 'b' and enter to create a bag file of optimized fused posegraph and pointclouds.
+In the config file add path where the bag file needed to be saved.
+Run the bag file with 
+```
+    rosbag play your_bag.bag
+    roslaunch voxblox_ros d455_outdoor.launch 
+```
+Run this command in a new terminal after the bag is finished running to generate the map mesh
 ```
 rosservice call /voxblox_node/generate_mesh "{}"
 ```
-The mesh is saved in voxblox_ros/mesh_results
+The mesh is saved in voxblox_ros/mesh_results this mesh can be visualised using open3d or any visusalization tools
 
 
